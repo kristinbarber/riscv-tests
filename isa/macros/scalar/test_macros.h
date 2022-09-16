@@ -732,6 +732,42 @@ test_ ## testnum: \
   csrw mepc, x15; \
   mret
 
+#define TEST_FAST_BYPASS(testnum) \
+        test_ ## testnum: \
+        li  TESTNUM, testnum; \
+        add x0, x0, x0; \
+        li x11, 10; \
+        li x6, -1; \
+loop:   not x6, x6; \
+        addi x11, x11, -1; \
+        add x0, x0, x0; \
+        add x0, x0, x0; \
+        add x0, x0, x0; \
+        add x0, x0, x0; \
+        add x0, x0, x0; \
+        add x0, x0, x0; \
+        add x0, x0, x0; \
+        add x0, x0, x0; \
+        add x0, x0, x0; \
+        add x0, x0, x0; \
+        add x0, x0, x0; \
+        add x0, x0, x0; \
+        add x0, x0, x0; \
+        add x0, x0, x0; \
+        add x0, x0, x0; \
+        add x0, x0, x0; \
+        add x0, x0, x0; \
+        add x0, x0, x0; \
+        add x0, x0, x0; \
+        add x0, x0, x0; \
+        li x4, 0x5; \
+        li x5, 0x7; \
+        xor x5, x5, x4; \
+        and x5, x6, x5; \
+        xor x5, x5, x4; \
+        addi x5, x5, 0x100; \
+        bne x11, x0, loop \
+
 #-----------------------------------------------------------------------
 # Pass and fail code (assumes test num is in TESTNUM)
 #-----------------------------------------------------------------------
